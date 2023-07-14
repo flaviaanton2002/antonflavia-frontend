@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { ButtonStyle } from "./Button";
 import { primary } from "@/lib/colors";
 import { CartContext } from "@/components/CartContex";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 
 const FlyingButtonWrapper = styled.div`
   button {
@@ -11,18 +11,18 @@ const FlyingButtonWrapper = styled.div`
       props.main
         ? `
     background-color: ${primary};
-    color: white;
+    color: #fffffe;
     `
         : `
-    background-color: transparent;
+    background-color: #ffd2b1;
     border: 1px solid ${primary};
     color: ${primary};
     `}
     ${(props) =>
       props.white &&
       `
-        background-color: white;
-        border: 1px solid white;
+        background-color: #fffffe;
+        border: 1px solid #fffffe;
         font-weight: 500;
     `}
   }
@@ -44,13 +44,14 @@ const FlyingButtonWrapper = styled.div`
     position: fixed;
     z-index: 5;
     animation: fly 1s;
-    border-radius: 10px;
+    border-radius: 8px;
   }
 `;
 
 export default function FlyingButton(props) {
   const { addProduct } = useContext(CartContext);
   const imgRef = useRef();
+
   function sendImageToCart(ev) {
     imgRef.current.style.display = "inline-block";
     imgRef.current.style.left = ev.clientX - 50 + "px";
@@ -59,17 +60,17 @@ export default function FlyingButton(props) {
       imgRef.current.style.display = "none";
     }, 1000);
   }
+
   useEffect(() => {
     const interval = setInterval(() => {
       const reveal = imgRef.current?.closest("div[data-sr-id");
       if (reveal?.style.opacity === "1") {
-        // visible
         reveal.style.transform = "none";
       }
     }, 100);
-
     return () => clearInterval(interval);
   }, []);
+
   return (
     <>
       <FlyingButtonWrapper
@@ -77,7 +78,7 @@ export default function FlyingButton(props) {
         main={props.main}
         onClick={() => addProduct(props._id)}
       >
-        <img src={props.src} alt="" ref={imgRef} />
+        <img src={props.src} ref={imgRef} />
         <button onClick={(ev) => sendImageToCart(ev)} {...props} />
       </FlyingButtonWrapper>
     </>

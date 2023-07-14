@@ -19,11 +19,13 @@ const ColWrapper = styled.div`
   gap: 40px;
   margin: 40px 0;
 `;
+
 const PriceRow = styled.div`
   displey: flex;
   gap: 20px;
   align-items: center;
 `;
+
 const Price = styled.span`
   font-size: 1.4rem;
 `;
@@ -45,7 +47,11 @@ export default function ProductPage({ product }) {
                 <Price>{product.price} RON</Price>
               </div>
               <div>
-                <FlyingButton main id={product._id} src={product.images?.[0]}>
+                <FlyingButton
+                  main={1}
+                  id={product._id}
+                  src={product.images?.[0]}
+                >
                   <CartIcon />
                   Adaugă în coș
                 </FlyingButton>

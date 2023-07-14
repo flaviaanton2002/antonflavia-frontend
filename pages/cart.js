@@ -36,8 +36,8 @@ const ColumnsWrapper = styled.div`
 `;
 
 const Box = styled.div`
-  background-color: #fff;
-  border-radius: 10px;
+  background-color: #fffffe;
+  border-radius: 8px;
   padding: 30px;
 `;
 
@@ -49,11 +49,11 @@ const ProductImageBox = styled.div`
   width: 70px;
   height: 100px;
   padding: 2px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid #eff0f3;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: 8px;
   img {
     max-width: 60px;
     max-height: 60px;
@@ -96,6 +96,7 @@ export default function CartPage() {
   const [country, setCountry] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const [shippingFee, setShippingFee] = useState(null);
+
   useEffect(() => {
     if (cartProducts.length > 0) {
       axios.post("/api/cart", { ids: cartProducts }).then((response) => {
@@ -105,6 +106,7 @@ export default function CartPage() {
       setProducts([]);
     }
   }, [cartProducts]);
+
   useEffect(() => {
     if (typeof window === "undefined") {
       return;
@@ -117,25 +119,29 @@ export default function CartPage() {
       setShippingFee(res.data.value);
     });
   }, []);
+
   useEffect(() => {
     if (!session) {
       return;
     }
     axios.get("/api/address").then((response) => {
-      setName(response.data.name);
-      setEmail(response.data.email);
-      setCity(response.data.city);
-      setPostalCode(response.data.postalCode);
-      setStreetAddress(response.data.streetAddress);
-      setCountry(response.data.country);
+      setName(response.data?.name);
+      setEmail(response.data?.email);
+      setCity(response.data?.city);
+      setPostalCode(response.data?.postalCode);
+      setStreetAddress(response.data?.streetAddress);
+      setCountry(response.data?.country);
     });
   }, [session]);
+
   function moreOfThisProduct(id) {
     addProduct(id);
   }
+
   function lessOfThisProduct(id) {
     removeProduct(id);
   }
+
   async function goToPayment() {
     const response = await axios.post("/api/checkout", {
       name,
@@ -151,6 +157,7 @@ export default function CartPage() {
       window.location = response.data.url;
     }
   }
+
   let productsTotal = 0;
   for (const productId of cartProducts) {
     const price = products.find((p) => p._id === productId)?.price || 0;
@@ -165,13 +172,14 @@ export default function CartPage() {
           <ColumnsWrapper>
             <Box>
               <h1>Mulțumesc pentru comanda ta!</h1>
-              <p>Îți vom trimite un email când comanda ta va fi trimisă.</p>
+              <p>Vei primi un email când aceasta va fi trimisă.</p>
             </Box>
           </ColumnsWrapper>
         </Center>
       </>
     );
   }
+
   return (
     <>
       <Header />
@@ -191,14 +199,16 @@ export default function CartPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {products.map((product) => (
-                      <tr>
-                        <ProductInfoCell>
-                          <ProductImageBox>
-                            <img src={product.images[0]} alt="" />
-                          </ProductImageBox>
-                          {product.title}
-                        </ProductInfoCell>
+                    {products.map((product, index) => (
+                      <tr key={index}>
+                        <td>
+                          <ProductInfoCell>
+                            <ProductImageBox>
+                              <img src={product.images[0]} />
+                            </ProductImageBox>
+                            {product.title}
+                          </ProductInfoCell>
+                        </td>
                         <td>
                           <Button
                             onClick={() => lessOfThisProduct(product._id)}

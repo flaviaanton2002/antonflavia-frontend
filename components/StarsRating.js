@@ -9,6 +9,7 @@ const StarsWrapper = styled.div`
   gap: 1px;
   align-items: center;
 `;
+
 const StarWrapper = styled.button`
   ${(props) =>
     props.size === "md" &&
@@ -42,6 +43,7 @@ export default function StarsRating({
 }) {
   const [howMany, setHowMany] = useState(defaultHowMany);
   const five = [1, 2, 3, 4, 5];
+
   function handleStarClick(n) {
     if (disabled) {
       return;
@@ -49,18 +51,18 @@ export default function StarsRating({
     setHowMany(n);
     onChange(n);
   }
+
   return (
     <StarsWrapper>
-      {five.map((n) => (
-        <>
-          <StarWrapper
-            disabled={disabled}
-            size={size}
-            onClick={() => handleStarClick(n)}
-          >
-            {howMany >= n ? <StarSolid /> : <StarOutline />}
-          </StarWrapper>
-        </>
+      {five.map((n, index) => (
+        <StarWrapper
+          key={index}
+          disabled={disabled}
+          size={size}
+          onClick={() => handleStarClick(n)}
+        >
+          {howMany >= n ? <StarSolid /> : <StarOutline />}
+        </StarWrapper>
       ))}
     </StarsWrapper>
   );

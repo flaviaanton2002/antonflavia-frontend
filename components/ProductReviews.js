@@ -12,10 +12,12 @@ const Title = styled.h2`
   font-size: 1.2rem;
   margin-bottom: 5px;
 `;
+
 const Subtitle = styled.h3`
   font-size: 1rem;
   margin-top: 5px;
 `;
+
 const ColsWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
@@ -26,29 +28,31 @@ const ColsWrapper = styled.div`
     gap: 40px;
   }
 `;
+
 const ReviewWrapper = styled.div`
   margin-bottom: 10px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid #6b7280;
   padding: 10px 0;
   h3 {
     margin: 3px 0;
     font-size: 1rem;
-    color: #333;
+    color: #0d0d0d;
     font-weight: normal;
   }
   p {
     margin: 0;
     font-size: 0.7rem;
     line-height: 1rem;
-    color: #555;
+    color: #6b7280;
   }
 `;
+
 const ReviewHeader = styled.div`
   display: flex;
   justify-content: space-between;
   time {
     font-size: 12px;
-    color: #aaa;
+    color: #6b7280;
   }
 `;
 
@@ -95,7 +99,7 @@ export default function ProductReviews({ product }) {
             <Textarea
               value={description}
               onChange={(ev) => setDescription(ev.target.value)}
-              placeholder="A fost bun? Pro? Contra?"
+              placeholder="Spune părerea persoanlă"
             />
             <div>
               <Button primary onClick={submitReview}>
@@ -110,8 +114,8 @@ export default function ProductReviews({ product }) {
             {reviewsLoading && <Spinner fullWidth={true} />}
             {reviews.length === 0 && <p>Nu există recenzii :(</p>}
             {reviews.length > 0 &&
-              reviews.map((review) => (
-                <ReviewWrapper>
+              reviews.map((review, index) => (
+                <ReviewWrapper key={index}>
                   <ReviewHeader>
                     <StarsRating
                       size={"sm"}
@@ -119,7 +123,7 @@ export default function ProductReviews({ product }) {
                       defaultHowMany={review.stars}
                     />
                     <time>
-                      {new Date(review.createdAt).toLocaleString("sv-SE")}
+                      {new Date(review.createdAt).toLocaleString("ro-RO")}
                     </time>
                   </ReviewHeader>
                   <h3>{review.title}</h3>

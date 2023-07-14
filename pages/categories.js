@@ -31,22 +31,23 @@ const CategoryTitle = styled.div`
     margin-top: 10px;
   }
   a {
-    color: #555;
+    color: #6b7280;
     display: inline-block;
   }
 `;
+
 const CategoryWrapper = styled.div`
   margin-bottom: 40px;
 `;
 
 const ShowAllSquare = styled(Link)`
-  background-color: #ddd;
+  background-color: #fffffe;
   height: 160px;
-  border-radius: 10px;
+  border-radius: 8px;
   align-items: center;
   display: flex;
   justify-content: center;
-  color: #555;
+  color: #6b7280;
   text-decoration: none;
 `;
 
@@ -59,17 +60,14 @@ export default function CategoriesPage({
     <>
       <Header />
       <Center>
-        {mainCategories.map((cat) => (
-          <CategoryWrapper>
+        {mainCategories.map((cat, index) => (
+          <CategoryWrapper key={index}>
             <CategoryTitle>
               <h2>{cat.name}</h2>
-              <div>
-                <Link href={"/category/" + cat._id}>Arată toate</Link>
-              </div>
             </CategoryTitle>
             <CategoryGrid>
               {categoriesProducts[cat._id].map((p, index) => (
-                <RevealWrapper delay={index * 50}>
+                <RevealWrapper key={index} delay={index * 50}>
                   <ProductBox {...p} wished={wishedProducts.includes(p._id)} />
                 </RevealWrapper>
               ))}
@@ -90,8 +88,9 @@ export async function getServerSideProps(ctx) {
   await mongooseConnect();
   const categories = await Category.find();
   const mainCategories = categories.filter((c) => !c.parent);
-  const categoriesProducts = {}; // catId => [products]
+  const categoriesProducts = {};
   const allFetchedProductsId = [];
+
   for (const mainCat of mainCategories) {
     const mainCatId = mainCat._id.toString();
     const childCatIds = categories

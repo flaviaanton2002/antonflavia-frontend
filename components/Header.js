@@ -7,23 +7,25 @@ import BarsIcon from "./icons/Bars";
 import SearchIcon from "./icons/SearchIcon";
 
 const StyledHeader = styled.header`
-  background-color: #222;
+  background-color: #0d0d0d;
   position: sticky;
   top: 0;
   z-index: 10;
 `;
 
 const Logo = styled(Link)`
-  color: #fff;
+  color: #fffffe;
   text-decoration: none;
   position: relative;
   z-index: 3;
 `;
+
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 20px 0;
 `;
+
 const StyledNav = styled.nav`
   ${(props) =>
     props.mobileNavActive
@@ -38,16 +40,17 @@ const StyledNav = styled.nav`
   left: 0;
   right: 0;
   padding: 70px 20px 20px;
-  background-color: #222;
+  background-color: #0d0d0d;
   @media screen and (min-width: 768px) {
     display: flex;
     position: static;
     padding: 0;
   }
 `;
+
 const NavLink = styled(Link)`
   display: block;
-  color: #aaa;
+  color: #fffffe;
   text-decoration: none;
   min-width: 30 px;
   padding: 10px 0;
@@ -58,12 +61,13 @@ const NavLink = styled(Link)`
     padding: 0;
   }
 `;
+
 const NavButton = styled.button`
   background-color: transparent;
   width: 30px;
   height: 30px;
   border: 0;
-  color: white;
+  color: #fffffe;
   cursor: pointer;
   position: relative;
   z-index: 3;
@@ -71,13 +75,14 @@ const NavButton = styled.button`
     display: none;
   }
 `;
+
 const SideIcons = styled.div`
   display: flex;
   align-items: center;
   a {
     display: inline-block;
     min-width: 20px;
-    color: white;
+    color: #fffffe;
     svg {
       width: 14px;
       height: 14px;
@@ -92,7 +97,7 @@ export default function Header() {
     <StyledHeader>
       <Center>
         <Wrapper>
-          <Logo href={"/"}>Ecommerce</Logo>
+          <Logo href={"/"}>Site</Logo>
           <StyledNav mobileNavActive={mobileNavActive}>
             <NavLink href={"/"}>Acasă</NavLink>
             <NavLink href={"/products"}>Toate produsele</NavLink>

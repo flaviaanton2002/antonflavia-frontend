@@ -6,10 +6,11 @@ import FlyingButton from "./FlyingButton";
 import { RevealWrapper } from "next-reveal";
 
 const Bg = styled.div`
-  background-color: #222;
-  color: #fff;
+  background-color: #0d0d0d;
+  color: #fffffe;
   padding: 50px 0;
 `;
+
 const Title = styled.h1`
   margin: 0;
   font-weight: normal;
@@ -18,10 +19,12 @@ const Title = styled.h1`
     font-size: 3rem;
   }
 `;
+
 const Desc = styled.p`
-  color: #aaa;
+  color: #eef0f3;
   font-size: 0.8rem;
 `;
+
 const ColumnsWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
@@ -47,15 +50,18 @@ const ColumnsWrapper = styled.div`
     }
   }
 `;
+
 const Column = styled.div`
   display: flex;
   align-items: center;
 `;
+
 const ButtonsWrapper = styled.div`
   display: flex;
   gap: 10px;
   margin-top: 25px;
 `;
+
 const CenterImg = styled.div`
   display: flex;
   align-items: center;
@@ -88,7 +94,7 @@ export default function Featured({ product }) {
                       outline={1}
                       white={1}
                     >
-                      Citește mai mult
+                      Mai multe detalii...
                     </ButtonLink>
                     <FlyingButton
                       white={1}

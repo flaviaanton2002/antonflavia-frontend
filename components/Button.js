@@ -4,7 +4,7 @@ import { primary } from "@/lib/colors";
 export const ButtonStyle = css`
   border: 0;
   padding: 5px 15px;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -26,31 +26,31 @@ export const ButtonStyle = css`
     props.white &&
     !props.outline &&
     css`
-      background-color: #fff;
-      color: #000;
+      background-color: #fffffe;
+      color: #0d0d0d;
     `}
   ${(props) =>
     props.white &&
     props.outline &&
     css`
       background-color: transparent;
-      color: #fff;
-      border: 1px solid #fff;
+      color: #fffffe;
+      border: 1px solid #fffffe;
     `}
     ${(props) =>
     props.black &&
     !props.outline &&
     css`
-      background-color: #000;
-      color: #fff;
+      background-color: #0d0d0d;
+      color: #fffffe;
     `}
     ${(props) =>
     props.black &&
     props.outline &&
     css`
       background-color: transparent;
-      color: #000;
-      border: 1px solid #000;
+      color: #0d0d0d;
+      border: 1px solid #0d0d0d;
     `}
 ${(props) =>
     props.primary &&
@@ -58,7 +58,7 @@ ${(props) =>
     css`
       background-color: ${primary};
       border: 1px solid ${primary};
-      color: #fff;
+      color: #fffffe;
     `}
 ${(props) =>
     props.primary &&

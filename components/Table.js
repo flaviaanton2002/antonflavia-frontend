@@ -5,7 +5,7 @@ const StyledTable = styled.table`
   th {
     text-align: left;
     text-transform: uppercase;
-    color: #ccc;
+    color: #6b7280;
     text-weight: 600;
     font-size: 0.7rem;
   }

@@ -10,7 +10,7 @@ import Spinner from "@/components/Spinner";
 
 const SearchInput = styled(Input)`
   padding: 5px 10px;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 1.4rem;
 `;
 
@@ -19,7 +19,7 @@ const InputWrapper = styled.div`
   top: 68px;
   margin: 25px 0;
   padding: 10px 0;
-  background-color: #eeeeeeaa;
+  background-color: #eff0f3;
 `;
 
 export default function SearchPage() {
@@ -27,6 +27,7 @@ export default function SearchPage() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const debouncedSearch = useCallback(debounce(searchProducts, 500), []);
+
   useEffect(() => {
     if (phrase.length > 0) {
       setIsLoading(true);
@@ -44,6 +45,7 @@ export default function SearchPage() {
         setIsLoading(false);
       });
   }
+
   return (
     <>
       <Header />
@@ -53,11 +55,11 @@ export default function SearchPage() {
             autoFocus
             value={phrase}
             onChange={(ev) => setPhrase(ev.target.value)}
-            placeholder="Caută produse..."
+            placeholder="Caută un produs..."
           />
         </InputWrapper>
         {!isLoading && phrase !== "" && products.length === 0 && (
-          <h2>Nu am găsit produse pentru căutarea "{phrase}"</h2>
+          <h2>Nu am găsit produse pentru căutarea {phrase}</h2>
         )}
         {isLoading && <Spinner fullWidth={true} />}
         {!isLoading && products.length > 0 && (

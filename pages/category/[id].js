@@ -1,5 +1,4 @@
 import Header from "@/components/Header";
-import Title from "@/components/Title";
 import Center from "@/components/Center";
 import { Category } from "@/models/Category";
 import { Product } from "@/models/Product";
@@ -17,22 +16,24 @@ const CategoryHeader = styled.div`
     font-size: 1.5em;
   }
 `;
+
 const FiltersWrapper = styled.div`
   display: flex;
   gap: 15px;
 `;
+
 const Filter = styled.div`
-  background-color: #ddd;
+  background-color: #fffffe;
   padding: 5px 10px;
-  border-radius: 5px;
+  border-radius: 8px;
   display: flex;
   gap: 5px;
-  color: #444;
+  color: #6b7280;
   select {
     background-color: transparent;
     border: 0;
     font-size: inherit;
-    color: #444;
+    color: #6b7280;
   }
 `;
 
@@ -61,6 +62,7 @@ export default function CategoryPage({
     });
     setFiltersChanged(true);
   }
+
   useEffect(() => {
     if (!filtersChanged) {
       return;
@@ -81,6 +83,7 @@ export default function CategoryPage({
       setLoadingProducts(false);
     });
   }, [filtersValues, sort, filtersChanged]);
+
   return (
     <>
       <Header />
@@ -127,9 +130,7 @@ export default function CategoryPage({
         {!loadingProducts && (
           <div>
             {products.length > 0 && <ProductsGrid products={products} />}
-            {products.length === 0 && (
-              <div>Ne pare rău, nu am găsit produse</div>
-            )}
+            {products.length === 0 && <div>Nu am găsit produse</div>}
           </div>
         )}
       </Center>
@@ -142,6 +143,7 @@ export async function getServerSideProps(context) {
   const subCategories = await Category.find({ parent: category._id });
   const catIds = [category._id, ...subCategories.map((c) => c._id)];
   const products = await Product.find({ category: catIds });
+
   return {
     props: {
       category: JSON.parse(JSON.stringify(category)),

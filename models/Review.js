@@ -1,6 +1,6 @@
-import { Schema, model, models } from "mongoose";
+import { model, models, Schema } from "mongoose";
 
-const reviewSchema = new Schema(
+const ReviewSchema = new Schema(
   {
     title: String,
     description: String,
@@ -10,4 +10,4 @@ const reviewSchema = new Schema(
   { timestamps: true }
 );
 
-export const Review = models?.Review || model("Review", reviewSchema);
+export const Review = models?.Review || model("Review", ReviewSchema);

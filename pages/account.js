@@ -1,5 +1,4 @@
 import Header from "@/components/Header";
-import Title from "@/components/Title";
 import Center from "@/components/Center";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Button from "@/components/Button";
@@ -55,13 +54,16 @@ export default function AccountPage() {
       callbackUrl: process.env.NEXT_PUBLIC_URL,
     });
   }
+
   async function login() {
     await signIn("google");
   }
+
   function saveAddress() {
     const data = { name, email, city, streetAddress, postalCode, country };
     axios.put("/api/address", data);
   }
+
   useEffect(() => {
     if (!session) {
       return;
@@ -70,12 +72,12 @@ export default function AccountPage() {
     setWishlistLoaded(false);
     setOrderLoaded(false);
     axios.get("/api/address").then((response) => {
-      setName(response.data.name);
-      setEmail(response.data.email);
-      setCity(response.data.city);
-      setPostalCode(response.data.postalCode);
-      setStreetAddress(response.data.streetAddress);
-      setCountry(response.data.country);
+      setName(response.data?.name);
+      setEmail(response.data?.email);
+      setCity(response.data?.city);
+      setPostalCode(response.data?.postalCode);
+      setStreetAddress(response.data?.streetAddress);
+      setCountry(response.data?.country);
       setAddressLoaded(true);
     });
     axios.get("/api/wishlist").then((response) => {
@@ -87,11 +89,13 @@ export default function AccountPage() {
       setOrderLoaded(true);
     });
   }, [session]);
+
   function productRemovedFromWishlist(idToRemove) {
     setWishedProducts((products) => {
       return [...products.filter((p) => p._id.toString() !== idToRemove)];
     });
   }
+
   return (
     <>
       <Header />
@@ -114,7 +118,9 @@ export default function AccountPage() {
                           <p>Conectează-te pentru a vedea comenzile tale</p>
                         )}
                         {orders.length > 0 &&
-                          orders.map((o) => <SingleOrder {...o} />)}
+                          orders.map((o, index) => (
+                            <SingleOrder key={index} {...o} />
+                          ))}
                       </div>
                     )}
                   </>

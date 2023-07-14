@@ -5,6 +5,7 @@ const StyledTabs = styled.div`
   gap: 20px;
   margin-bottom: 20px;
 `;
+
 const StyledTab = styled.span`
   font-size: 1.5rem;
   cursor: pointer;
@@ -12,17 +13,18 @@ const StyledTab = styled.span`
     props.active
       ? `
     color: black;
-    border-bottom: 2px solid black`
+    border-bottom: 2px solid #0d0d0d`
       : `
-    color: #999;
+    color: #6b7280;
   `}
 `;
 
 export default function Tabs({ tabs, active, onChange }) {
   return (
     <StyledTabs>
-      {tabs.map((tabName) => (
+      {tabs.map((tabName, index) => (
         <StyledTab
+          key={index}
           onClick={() => {
             onChange(tabName);
           }}

@@ -5,7 +5,7 @@ import { SessionProvider } from "next-auth/react";
 const GlobalStyles = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');  
 body {
-    background-color: #eee;
+    background-color: #eff0f3;
     padding: 0;
     margin: 0;
     font-family: "Poppins", sans-serif;  
@@ -13,7 +13,7 @@ body {
   hr {
     display: block;
     border: 0;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #6b7280;
   }
 `;
 

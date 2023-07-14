@@ -1,14 +1,11 @@
 import styled from "styled-components";
-import Button, { ButtonStyle } from "@/components/Button";
-import CartIcon from "@/components/icons/CartIcon";
 import Link from "next/link";
-import { useContext, useEffect, useState } from "react";
-import { CartContext } from "@/components/CartContex";
-import { primary } from "@/lib/colors";
+import { useState } from "react";
 import FlyingButton from "@/components/FlyingButton";
 import HeartOutlineIcon from "./icons/HeartOutlineIcon";
 import HeartSolidIcon from "./icons/HeartSolidIcon";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const ProductWrapper = styled.div`
   button {
@@ -19,14 +16,14 @@ const ProductWrapper = styled.div`
 `;
 
 const WhiteBox = styled(Link)`
-  background-color: #fff;
+  background-color: #fffffe;
   padding: 20px;
   height: 120px;
   text-align: center;
   display: felx;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: 8px;
   position: relative;
   img {
     max-width: 100%;
@@ -81,10 +78,10 @@ const WishlistButton = styled.button`
   ${(props) =>
     props.wished
       ? `
-    color: red;
+    color: #d9376e;
   `
       : `
-    color: black;
+    color: #0d0d0d;
   `}
   svg {
     width: 16px;
@@ -102,6 +99,7 @@ export default function ProductBox({
 }) {
   const url = "/product/" + _id;
   const [isWished, setIsWished] = useState(wished);
+
   function addToWishlist(ev) {
     ev.preventDefault();
     ev.stopPropagation();
@@ -113,9 +111,21 @@ export default function ProductBox({
       .post("/api/wishlist", {
         product: _id,
       })
-      .then(() => {});
-    setIsWished(nextValue);
+      .then(() => {
+        setIsWished(nextValue);
+      })
+      .catch((e) => {
+        Swal.fire({
+          title: e.response.data.message,
+          icon: "error",
+          iconColor: "#ff8e3c",
+          color: "#0d0d0d",
+          confirmButtonColor: "#ff8e3c",
+          background: "#eff0f3",
+        });
+      });
   }
+
   return (
     <ProductWrapper>
       <WhiteBox href={url}>

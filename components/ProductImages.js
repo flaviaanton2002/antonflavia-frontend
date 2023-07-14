@@ -5,23 +5,25 @@ const Image = styled.img`
   max-width: 100%;
   max-height: 100%;
 `;
+
 const BigImage = styled.img`
   max-width: 100%;
   max-height: 200px;
 `;
+
 const ImageButtons = styled.div`
   display: flex;
   gap: 10px;
   flex-grow: 0;
   margin-top: 10px;
 `;
-const ImageButton = styled.div`
-  border: 2px solid #ccc;
 
+const ImageButton = styled.div`
+  border: 2px solid;
   ${(props) =>
     props.active
       ? `
-    border-color: #ccc;
+    border-color: #6b7280;
     `
       : `
     border-color: transparent;
@@ -29,7 +31,7 @@ const ImageButton = styled.div`
   height: 40px;
   padding: 2px;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 8px;
 `;
 const BigImageWrapper = styled.div`
   text-align: center;
@@ -49,7 +51,7 @@ export default function ProductImages({ images }) {
             active={image === activeImage}
             onClick={() => setActiveImage(image)}
           >
-            <Image src={image} alt="" />
+            <Image src={image} />
           </ImageButton>
         ))}
       </ImageButtons>
